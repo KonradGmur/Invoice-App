@@ -1,5 +1,24 @@
 <template>
-  <div class="home"></div>
+  <div class="home containter">
+    <div class="header flex">
+      <div class="left flex flex-column">
+        <h1>Invoices</h1>
+        <span>There are 4 total invoices</span>
+      </div>
+      <div class="right flex">
+        <div @click="toggleFilterMenu" class="filter flex" ref="filter">
+          <span>Filter by status</span>
+          <img src="@/assets/icon-arrow-down.svg" alt="" />
+          <ul v-show="filterMenu" class="filter-menu">
+            <li>Draft</li>
+            <li>Pending</li>
+            <li>Paid</li>
+            <li>Clear Filter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
