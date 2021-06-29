@@ -24,18 +24,19 @@ header {
     border-radius: 0 20px 20 0;
   }
 
-  .branding{
-      border-radius: 0 20px 20px 0;
-      background-color: #7c5dfa;
-      justify-content: center;
-      padding: 24px;
-      @media(min-width: 900px){
-          width: 100%;
-      }
+  .branding {
+    border-radius: 0 20px 20px 0;
+    background-color: #7c5dfa;
+    justify-content: center;
+    padding: 24px;
+    @media (min-width: 900px) {
+      width: 100%;
+    }
 
-      img{
-          width: auto;
-          height: 30px;
-      }
+    img {
+      width: auto;
+      height: 30px;
+    }
   }
+}
 </style>
