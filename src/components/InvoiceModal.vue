@@ -19,6 +19,30 @@
             v-model="billerStreetAddress"
           />
         </div>
+        <div class="location-details flex">
+          <div class="input flex flex-column">
+            <label for="billerCity">City</label>
+            <input required type="text" id="billerCity" v-model="billerCity" />
+          </div>
+          <div class="input flex flex-column">
+            <label for="billerZipCode">Zip Code</label>
+            <input
+              required
+              type="text"
+              id="billerZipCode"
+              v-model="billerZipCode"
+            />
+          </div>
+          <div class="input flex flex-column">
+            <label for="billerCountry">Country</label>
+            <input
+              required
+              type="text"
+              id="billerCountry"
+              v-model="billerCountry"
+            />
+          </div>
+        </div>
       </div>
     </form>
   </div>
