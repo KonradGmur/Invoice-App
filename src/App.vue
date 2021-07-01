@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-if="!mobile" class="app flex-columnt">
+    <div v-if="!mobile" class="app flex flex-column">
+      <Navigation />
       <div class="app-content flex flex-column">
-        <Navigation />
+        <InvoiceModal />
+        <router-view />
       </div>
     </div>
     <div v-else class="mobile-message flex flex-column">
@@ -10,11 +12,11 @@
       <p>To use this app, please use a Computer or Tablet</p>
     </div>
   </div>
-  <router-view />
 </template>
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import invoiceModal from "./components/InvoiceModal.vue";
 export default {
   data() {
     return {
@@ -23,6 +25,7 @@ export default {
   },
   components: {
     Navigation,
+    invoiceModal,
   },
   created() {
     this.checkScreen();

@@ -64,8 +64,7 @@
             v-model="clientStreetAddress"
           />
         </div>
-      </div>
-      <div class="location-details flex">
+        <div class="location-details flex">
           <div class="input flex flex-column">
             <label for="clientCity">City</label>
             <input required type="text" id="clientCity" v-model="clientCity" />
@@ -89,6 +88,31 @@
             />
           </div>
         </div>
+      </div>
+
+      <!--Invoice Work Details-->
+      <div class="invoice-work flex flex-column">
+        <div class="payment flex">
+          <div class="input flex flex-column">
+            <label for="invoiceDate">Invoice Date</label>
+            <input
+              disabled
+              type="text"
+              id="invoiceDate"
+              v-model="invoiceDate"
+            />
+          </div>
+          <div class="input flex flex-column">
+            <label for="paymentDueDate">Payment Due</label>
+            <input
+              disabled
+              type="text"
+              id="paymentDueDate"
+              v-model="paymentDueDate"
+            />
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </template>
