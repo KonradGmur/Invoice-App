@@ -112,6 +112,22 @@
             />
           </div>
         </div>
+        <div class="input flex flex-column">
+          <label for="paymentTerms">Payment Terms</label>
+          <select required type="text" id="paymentTerms" v-model="paymentTerms">
+            <option value="30">Net 30 Days</option>
+            <option value="60">Net 60 Days</option>
+          </select>
+        </div>
+        <div class="input flex flex-column">
+          <label for="productDescription">Product Description</label>
+          <input
+            required
+            type="text"
+            id="productDescription"
+            v-model="productDescription"
+          />
+        </div>
       </div>
     </form>
   </div>
