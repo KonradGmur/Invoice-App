@@ -89,7 +89,6 @@
           </div>
         </div>
       </div>
-
       <!--Invoice Work Details-->
       <div class="invoice-work flex flex-column">
         <div class="payment flex">
@@ -127,6 +126,42 @@
             id="productDescription"
             v-model="productDescription"
           />
+        </div>
+      </div>
+      <div class="work-items">
+        <h3>Item List</h3>
+        <table class="item-list">
+          <tr class="table-heading flex">
+            <th class="item-name">Item Name</th>
+            <th class="qty">Qty</th>
+            <th class="price">Price</th>
+            <th class="total">Total</th>
+          </tr>
+          <tr
+            class="table-items flex"
+            v-for="(item, index) in invoiceItemList"
+            :key="index"
+          >
+            <td class="item-name">
+              <input type="text" v-model="item.itemName" />
+            </td>
+            <td class="qty"><input type="text" v-model="item.item.qty" /></td>
+            <td class="price">
+              <input type="text" v-model="item.item.price" />
+            </td>
+            <td class="total flex">
+              ${{ (item.total = item.qty * item.price) }}
+            </td>
+            <img
+              @click="deleteInvoiceItem(item.id)"
+              src="@/assets/icon-delete.svg"
+              alt=""
+            />
+          </tr>
+        </table>
+        <div @click="addNewInvoiceItem" class="flex button">
+          <img src="@/assets/icon-plus.svg" alt="" />
+          Add New Item
         </div>
       </div>
     </form>
