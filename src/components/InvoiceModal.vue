@@ -247,6 +247,58 @@ export default {
       font-size: 12px;
       margin-bottom: 24px;
     }
+
+    // Bill To // Bill From
+    .bill-to,
+    .bill-from {
+      margin-bottom: 48px;
+
+      .location-details {
+        gap: 16px;
+        div {
+          flex: 1;
+        }
+      }
+    }
+
+    // Invoice Work
+    .invoice-work {
+      .payment {
+        gap: 24px;
+        div {
+          flex: 1;
+        }
+      }
+
+      .work-items {
+        .item-list {
+          width: 100%;
+
+          // Item Table Styling
+          .table-headeing,
+          .table-items {
+            gap: 16px;
+            font-size: 12px;
+
+            .item-name {
+              flex-basis: 50%;
+            }
+
+            .qty {
+              flex-basis: 10%;
+            }
+
+            .price {
+              flex-basis: 20%;
+            }
+            .total {
+              flex-basis: 20%;
+              align-self: center;
+            }
+          }
+        }
+      }
+    }
   }
   .input {
     margin-bottom: 24px;
