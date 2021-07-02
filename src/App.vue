@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import mapState from "vuex";
 import Navigation from "./components/Navigation.vue";
 import invoiceModal from "./components/InvoiceModal.vue";
 export default {
@@ -40,6 +41,9 @@ export default {
       }
       this.mobile = false;
     },
+  },
+  computed: {
+    ...mapState([]),
   },
 };
 </script>
