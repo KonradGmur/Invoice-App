@@ -296,7 +296,51 @@ export default {
               align-self: center;
             }
           }
+
+          .table-heading {
+            margin-bottom: 16px;
+
+            th {
+              text-align: left;
+            }
+          }
+
+          .table-items {
+            position: relative;
+            margin-bottom: 24px;
+
+            img {
+              position: absolute;
+              top: 15px;
+              right: 0;
+              width: 12px;
+              height: 16px;
+            }
+          }
         }
+
+        .button {
+          color: #fff;
+          background-color: #252945;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+
+          img {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+    .save {
+      margin-top: 60px;
+
+      div {
+        flex: 1;
+      }
+
+      .right {
+        justify-content: flex-end;
       }
     }
   }
