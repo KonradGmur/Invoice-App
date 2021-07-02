@@ -127,41 +127,51 @@
             v-model="productDescription"
           />
         </div>
+        <div class="work-items">
+          <h3>Item List</h3>
+          <table class="item-list">
+            <tr class="table-heading flex">
+              <th class="item-name">Item Name</th>
+              <th class="qty">Qty</th>
+              <th class="price">Price</th>
+              <th class="total">Total</th>
+            </tr>
+            <tr
+              class="table-items flex"
+              v-for="(item, index) in invoiceItemList"
+              :key="index"
+            >
+              <td class="item-name">
+                <input type="text" v-model="item.itemName" />
+              </td>
+              <td class="qty"><input type="text" v-model="item.item.qty" /></td>
+              <td class="price">
+                <input type="text" v-model="item.item.price" />
+              </td>
+              <td class="total flex">
+                ${{ (item.total = item.qty * item.price) }}
+              </td>
+              <img
+                @click="deleteInvoiceItem(item.id)"
+                src="@/assets/icon-delete.svg"
+                alt=""
+              />
+            </tr>
+          </table>
+          <div @click="addNewInvoiceItem" class="flex button">
+            <img src="@/assets/icon-plus.svg" alt="" />
+            Add New Item
+          </div>
+        </div>
       </div>
-      <div class="work-items">
-        <h3>Item List</h3>
-        <table class="item-list">
-          <tr class="table-heading flex">
-            <th class="item-name">Item Name</th>
-            <th class="qty">Qty</th>
-            <th class="price">Price</th>
-            <th class="total">Total</th>
-          </tr>
-          <tr
-            class="table-items flex"
-            v-for="(item, index) in invoiceItemList"
-            :key="index"
-          >
-            <td class="item-name">
-              <input type="text" v-model="item.itemName" />
-            </td>
-            <td class="qty"><input type="text" v-model="item.item.qty" /></td>
-            <td class="price">
-              <input type="text" v-model="item.item.price" />
-            </td>
-            <td class="total flex">
-              ${{ (item.total = item.qty * item.price) }}
-            </td>
-            <img
-              @click="deleteInvoiceItem(item.id)"
-              src="@/assets/icon-delete.svg"
-              alt=""
-            />
-          </tr>
-        </table>
-        <div @click="addNewInvoiceItem" class="flex button">
-          <img src="@/assets/icon-plus.svg" alt="" />
-          Add New Item
+      <!--Save/Exit-->
+      <div class="save flex">
+        <div class="left">
+          <button @click="closeInvoice" class="red">Cancel</button>
+        </div>
+        <div class="right flex">
+          <div @click="saveDraft" class="dark-purple">Safe Draft</div>
+          <div @click="publishInvoice" class="purple">Create Invoice</div>
         </div>
       </div>
     </form>
@@ -198,4 +208,43 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.invoice-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  @media (min-width: 900px) {
+    left: 90px;
+  }
+
+  .invoice-content {
+    position: relative;
+    padding: 56px;
+    max-width: 700px;
+    width: 100%;
+    background-color: #141625;
+    color: #fff;
+    box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    h1 {
+      margin-bottom: 48px;
+      color: #fff;
+    }
+
+    h3 {
+      margin-bottom: 16px;
+      font-size: 18px;
+      color: #777f98;
+    }
+
+    h4{
+        
+    }
+  }
+}
+</style>
