@@ -242,9 +242,33 @@ export default {
       color: #777f98;
     }
 
-    h4{
-        
+    h4 {
+      color: #7c5dfa;
+      font-size: 12px;
+      margin-bottom: 24px;
     }
+  }
+  .input {
+    margin-bottom: 24px;
+  }
+
+  label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    background-color: #1e2139;
+    color: #fff;
+    border-radius: 4px;
+    padding: 12px 4px;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 </style>
