@@ -180,6 +180,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { uid } from "uid";
 export default {
   name: "invoiceModal",
   data() {
@@ -220,6 +221,17 @@ export default {
     closeInvoice() {
       this.TOGGLE_INVOICE();
     },
+
+    addNewInvoiceItem() {
+      this.invoiceItemList.push({
+        id: iud(),
+        itemName: "",
+        qty: "",
+        price: 0,
+        total: 0,
+      });
+    },
+    
   },
   watch: {
     paymentTerms() {
