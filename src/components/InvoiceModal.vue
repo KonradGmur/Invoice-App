@@ -231,7 +231,11 @@ export default {
         total: 0,
       });
     },
-    
+    deleteInvoiceItem(id) {
+      this.invoiceItemList = this.invoiceItemList.filter(
+        (item) => item.id !== id
+      );
+    },
   },
   watch: {
     paymentTerms() {
