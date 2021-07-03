@@ -94,7 +94,8 @@ export default {
   transition: 0.8s ease all;
 }
 
-.invoice-enter-from {
+.invoice-enter-from,
+.invoice-leave-to {
   transform: translateX(-700px);
 }
 
