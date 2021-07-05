@@ -283,6 +283,8 @@ export default {
         invoiceDraft: this.invoiceDraft,
         invoicePaid: null,
       });
+
+      this.TOGGLE_INVOICE();
     },
 
     submitForm() {
