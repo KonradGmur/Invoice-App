@@ -236,6 +236,13 @@ export default {
         (item) => item.id !== id
       );
     },
+
+    publishInvoice() {
+      this.invoicePending = true;
+    },
+    saveDraft() {
+      this.invoiceDraft = true;
+    },
   },
   watch: {
     paymentTerms() {
