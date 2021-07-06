@@ -228,9 +228,15 @@ export default {
     );
   },
   methods: {
-    ...mapMutations(["TOGGLE_INVOICE"]),
+    ...mapMutations(["TOGGLE_INVOICE", "TOOGLE_MODAL"]),
     closeInvoice() {
       this.TOGGLE_INVOICE();
+    },
+
+    checkClick(e) {
+      if (e.target === this.$refs.invoiceWrap) {
+        this.TOOGLE_MODAL(); 
+      }
     },
 
     addNewInvoiceItem() {
