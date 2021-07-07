@@ -6,6 +6,7 @@ export default createStore({
     invoiceData: [],
     invoiceModal: null,
     modalActive: null,
+    invoicesLoaded: null
   },
   mutations: {
     TOGGLE_INVOICE(state) {
@@ -13,6 +14,12 @@ export default createStore({
     },
     TOOGLE_MODAL(state) {
       state.modalActive = !state.modalActive;
+    },
+    SET_INVOICE_DATA(state, payload) {
+      state.invoiceData.push(payload)
+    },
+    INVOICES_LOADED(state) {
+      state.invoicesLoaded = true;
     }
   },
   actions: {
@@ -20,7 +27,7 @@ export default createStore({
       const getData = db.collection('invoices');
       const results = await getData.get();
       results.forEach(doc => {
-        if(!state.invoiceData.some(invoice => invoice.docID === doc.id)){
+        if (!state.invoiceData.some(invoice => invoice.docID === doc.id)) {
           const data = {
             docId: doc.id,
             invoiceId: doc.data().invoiceId,
@@ -46,8 +53,10 @@ export default createStore({
             invoiceDraft: doc.data().invoiceDraft,
             invoicePaid: doc.data().invoicePaid,
           };
+          commit('SET_INVOICE_DATA', data)
         }
       });
+      commit('INVOICES_LOADED')
     }
   },
   modules: {
