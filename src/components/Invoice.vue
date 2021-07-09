@@ -1,7 +1,10 @@
 <template>
-  <div>Testing</div>
+  <div>{{Invoice.invoiceId}}</div>
 </template>
 <script>
-export default {};
+export default {
+  name: "invoice",
+  props:["invoice"],
+};
 </script>
 <style lang="scss"></style>
