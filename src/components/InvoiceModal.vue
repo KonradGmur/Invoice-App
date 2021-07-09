@@ -6,7 +6,7 @@
   >
     <form @submit.prevent="submitForm" class="invoice-content">
       <Loading v-show="loading" />
-      <h1>New Invoice</h1>
+      <!-- <h1>New Invoice</h1> -->
 
       <!--Bill From -->
       <div class="bill-from flex flex-column">
