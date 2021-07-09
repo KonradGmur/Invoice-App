@@ -25,7 +25,7 @@
     </div>
     <!--Invoices -->
     <div>
-      <Invoice v-for="(invoice, index) in invoiceData" :key="index" />
+      <Invoice v-for="(invoice, index) in invoiceData" :invoice="invoice" :key="index" />
     </div>
   </div>
 </template>
