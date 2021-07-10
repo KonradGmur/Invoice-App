@@ -22,6 +22,9 @@
         <span v-if="invoice.invoiceDraft">Draft</span>
         <span v-if="invoice.invoicePending">Pending</span>
       </div>
+      <div class="icon">
+        <img alt="icon" src="@/assets/icon-arrow-right.svg" />
+      </div>
     </div>
   </router-link>
 </template>
