@@ -1,5 +1,9 @@
 <template>
-  <div>{{ currentInvoice.invoiceId }}</div>
+  <div v-if="currentInvoice" class="invoice-view container">
+    <router-link class="nav-link flex" :to="{ name: 'Home' }">
+      <img src="@/assets/icon-arrow-left.svg" alt="arrow" /> Go Back
+    </router-link>
+  </div>
 </template>
 
 <script>
