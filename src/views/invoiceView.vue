@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>{{ currentInvoice.invoiceId }}</div>
 </template>
 
 <script>
@@ -11,11 +11,15 @@ export default {
       currentInvoice: null,
     };
   },
+  created() {
+    this.getCurrentInvoice();
+  },
   methods: {
     ...mapMutations([SET_CURRENT_INVOICE]),
 
     getCurrentInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
+      this.currentInvoice = this.currentInvoiceArray[0];
     },
   },
   computed: {
