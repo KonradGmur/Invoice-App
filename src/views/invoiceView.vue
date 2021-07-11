@@ -3,7 +3,25 @@
 </template>
 
 <script>
-export default {};
+import { mapMutations, mapState } from "vuex";
+export default {
+  name: "invoiceView",
+  data() {
+    return {
+      currentInvoice: null,
+    };
+  },
+  methods: {
+    ...mapMutations([SET_CURRENT_INVOICE]),
+
+    getCurrentInvoice() {
+      this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
+    },
+  },
+  computed: {
+    ...mapState(["currentInvoiceArray"]),
+  },
+};
 </script>
 
 <style></style>
