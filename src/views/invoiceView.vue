@@ -53,6 +53,12 @@
           <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
           <p>{{ currentInvoice.productDescription }}</p>
         </div>
+        <div class="right flex flex-column">
+          <p>{{ currentInvoice.billerStreetAddress }}</p>
+          <p>{{ currentInvoice.billerCity }}</p>
+          <p>{{ currentInvoice.billerZipCode }}</p>
+          <p>{{ currentInvoice.billerCountry }}</p>
+        </div>
       </div>
     </div>
   </div>
