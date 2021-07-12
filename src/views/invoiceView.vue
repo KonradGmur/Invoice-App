@@ -19,6 +19,17 @@
           <span v-if="currentInvoice.invoicePending">Pending</span>
         </div>
       </div>
+      <div class="right flex">
+        <button
+          @click="toggleEdidInvoice(currentInvoice.docId)"
+          class="dark-purple"
+        >
+          Edit
+        </button>
+        <button @click="deleteIvoice(currentInvoice.docId)" class="red">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </template>
