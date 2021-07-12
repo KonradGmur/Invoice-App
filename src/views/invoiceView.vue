@@ -3,6 +3,7 @@
     <router-link class="nav-link flex" :to="{ name: 'Home' }">
       <img src="@/assets/icon-arrow-left.svg" alt="arrow" /> Go Back
     </router-link>
+    <!-- Header-->
     <div class="header flex">
       <div class="left flex">
         <span>Status</span>
@@ -28,6 +29,20 @@
         </button>
         <button @click="deleteIvoice(currentInvoice.docId)" class="red">
           Delete
+        </button>
+        <button
+          v-if="currentInvoice.invoicePending"
+          class="green"
+          @click="updateStatusToPaid(currentInvoice.docId)"
+        >
+          Mark as Paid
+        </button>
+        <button
+          v-if="currentInvoice.invoiceDraft || currentInvoice.invoicePaid"
+          @click="updateStatusToPending"
+          class="orange"
+        >
+          Mark as Pending
         </button>
       </div>
     </div>
