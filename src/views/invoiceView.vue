@@ -46,6 +46,15 @@
         </button>
       </div>
     </div>
+    <!-- Invoice Details-->
+    <div class="invoice-details flex flex-column">
+      <div class="top flex">
+        <div class="left flex">
+          <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
+          <p>{{ currentInvoice.productDescription }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
