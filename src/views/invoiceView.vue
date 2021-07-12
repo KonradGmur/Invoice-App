@@ -3,6 +3,23 @@
     <router-link class="nav-link flex" :to="{ name: 'Home' }">
       <img src="@/assets/icon-arrow-left.svg" alt="arrow" /> Go Back
     </router-link>
+    <div class="header flex">
+      <div class="left flex">
+        <span>Status</span>
+        <div
+          class="status-button flex"
+          :class="{
+            paid: currentInvoice.invoicePaid,
+            draft: currentInvoice.invoiceDraft,
+            pending: currentInvoice.invoicePending,
+          }"
+        >
+          <span v-if="currentInvoice.invoicePaid">Paid</span>
+          <span v-if="currentInvoice.invoicedraft">Draft</span>
+          <span v-if="currentInvoice.invoicePending">Pending</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
