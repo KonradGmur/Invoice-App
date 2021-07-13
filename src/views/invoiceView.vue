@@ -49,7 +49,7 @@
 		<!-- Invoice Details-->
 		<div class="invoice-details flex flex-column">
 			<div class="top flex">
-				<div class="left flex">
+				<div class="left flex flex-column">
 					<p><span>#</span>{{ currentInvoice.invoiceId }}</p>
 					<p>{{ currentInvoice.productDescription }}</p>
 				</div>
@@ -201,6 +201,41 @@ export default {
 				}
 				span {
 					color: #888eb0;
+				}
+			}
+			.right {
+				font-size: 12px;
+				align-items: flex-end;
+			}
+		}
+
+		.middle {
+			margin-top: 50px;
+			color: #dfe3fa;
+			gap: 16px;
+
+			h4 {
+				font-size: 12px;
+				font-weight: 400;
+				margin-bottom: 12pc;
+			}
+
+			p {
+				font-size: 16px;
+			}
+
+			.bill,
+			.payment {
+				flex: 1;
+			}
+
+			.payment {
+				h4:nth-child(3) {
+					margin-top: 32px;
+				}
+
+				p {
+					font-weight: 600;
 				}
 			}
 		}
