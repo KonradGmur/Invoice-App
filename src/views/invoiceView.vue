@@ -77,7 +77,31 @@
 				</div>
 				<div class="send-to flex flex-column">
 					<h4>Sent To</h4>
-					<p>{{ currentInvoice.clientEmail  }}</p>
+					<p>{{ currentInvoice.clientEmail }}</p>
+				</div>
+			</div>
+			<div class="bottom flex flex-column">
+				<div class="billing-items">
+					<div class="heading flex">
+						<p>Item Name</p>
+						<p>QTY</p>
+						<p>Price</p>
+						<p>Total</p>
+					</div>
+					<div
+						v-for="(item, index) in currentInvoice.invoiceItemList"
+						:key="index"
+						class="item flex"
+					>
+						<p>{{ item.itemName }}</p>
+						<p>{{ item.qty }}</p>
+						<p>{{ item.price }}</p>
+						<p>{{ item.total }}</p>
+					</div>
+				</div>
+				<div class="total flex">
+					<p>Amount</p>
+					<p>{{ currnetInvoice.invoiceTotal }}</p>
 				</div>
 			</div>
 		</div>
