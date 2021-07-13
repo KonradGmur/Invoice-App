@@ -178,5 +178,32 @@ export default {
 			}
 		}
 	}
+
+	.invoice-details {
+		padding: 48px;
+		margin-top: 24px;
+
+		.top {
+			div {
+				color: #dfe3fa;
+				flex: 1;
+			}
+			.left {
+				font-size: 12px;
+				p:first-child {
+					font-size: 24px;
+					text-transform: uppercase;
+					color: #fff;
+					margin-bottom: 8px;
+				}
+				p:nth-child(2) {
+					font-size: 12px;
+				}
+				span {
+					color: #888eb0;
+				}
+			}
+		}
+	}
 }
 </style>
