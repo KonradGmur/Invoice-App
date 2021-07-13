@@ -154,5 +154,29 @@ export default {
 		background-color: #1e2139;
 		border-radius: 20xp;
 	}
+
+	.header {
+		align-items: center;
+		padding: 24px 32px;
+		font-size: 12px;
+
+		.left {
+			align-items: center;
+
+			span {
+				color: #dfe3fa;
+				margin-right: 16px;
+			}
+		}
+
+		.right {
+			flex: 1;
+			justify-content: flex-end;
+
+			button {
+				color: #fff;
+			}
+		}
+	}
 }
 </style>
