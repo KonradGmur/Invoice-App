@@ -134,4 +134,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.invoice-view {
+	.nav-link {
+		margin-bottom: 32px;
+		align-items: center;
+		color: #fff;
+		font-size: 12px;
+
+		img {
+			margin-right: 16px;
+			width: 7px;
+			height: 10px;
+		}
+	}
+
+	.header,
+	.invoice-details {
+		background-color: #1e2139;
+		border-radius: 20xp;
+	}
+}
+</style>
