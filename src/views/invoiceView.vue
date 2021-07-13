@@ -75,6 +75,10 @@
 					<p>{{ currentInvoice.clientZipCode }}</p>
 					<p>{{ currentInvoice.clientCountry }}</p>
 				</div>
+				<div class="send-to flex flex-column">
+					<h4>Sent To</h4>
+					<p>{{ currentInvoice.clientEmail  }}</p>
+				</div>
 			</div>
 		</div>
 	</div>
