@@ -183,7 +183,7 @@ export default {
 		padding: 48px;
 		margin-top: 24px;
 
-		.top {
+		.top {  
 			div {
 				color: #dfe3fa;
 				flex: 1;
@@ -236,6 +236,38 @@ export default {
 
 				p {
 					font-weight: 600;
+				}
+			}
+
+			.bill {
+				p:nth-child(2) {
+					font-size: 16px;
+				}
+				p:nth-child(3) {
+					margin-top: auto;
+				}
+
+				p {
+					font-size: 12px;
+				}
+			}
+			.send-to {
+				flex: 2;
+			}
+		}
+
+		.bottom {
+			margin-top: 50px;
+
+			.billing-items {
+				padding: 32px;
+				border-radius: 20px 20px 0 0;
+				background-color: #251945;
+
+				.headings {
+					color: #dfe3fa;
+					font-size: 12px;
+					margin-bottom: 32px;
 				}
 			}
 		}
