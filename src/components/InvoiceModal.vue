@@ -235,14 +235,42 @@ export default {
 	},
 	created() {
 		// get current date for invoice date field
-		this.invoiceDateUnix = Date.now();
-		this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
-			'en-us',
-			this.dateOptions
-		);
+		if (!this.editInvoice) {
+			this.invoiceDateUnix = Date.now();
+			this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
+				'en-us',
+				this.dateOptions
+			);
+		}
+
+		if (this.editInvoice) {
+			const currentInvoice = this.currnetInvoiceArray[0];
+			this.docId = currentInvoice.docId;
+			this.billerStreetAddress = currentInvoice.billerStreetAddress;
+			this.billerCity = currentInvoice.billerCity;
+			this.billerZipCode = currentInvoice.billerZipCode;
+			this.billerCountry = currentInvoice.billerCountry;
+			this.clientName = currentInvoice.clientName;
+			this.clientEmail = currentInvoice.clientEmail;
+			this.clientStreetAddress = currentInvoice.clientStreetAddress;
+			this.clientCity = currentInvoice.clientCity;
+			this.clientZipCode = currentInvoice.clientZipCode;
+			this.clientCountry = currentInvoice.clientCountry;
+			this.invoiceDateUnix = currentInvoice.invoiceDateUnix;
+			this.invoiceDate = currentInvoice.invoiceDate;
+			this.paymentTerms = currentInvoice.paymentTerms;
+			this.paymentDueDateUnix = currentInvoice.paymentDueDateUnix;
+			this.paymentDueDate = currentInvoice.paymentDueDate;
+			this.productDescription = currentInvoice.productDescription;
+			this.invoicePending = currentInvoice.invoicePending;
+			this.invoiceDraft = currentInvoice.invoiceDraft;
+			this.invoiceItemList = currentInvoice.invoiceItemList;
+			this.invoiceTotal = currentInvoice.invoiceTotal;
+		}
 	},
 	methods: {
 		...mapMutations(['TOGGLE_INVOICE', 'TOOGLE_MODAL', 'TOGGLE_EDIT_INVOICE']),
+
 		closeInvoice() {
 			this.TOGGLE_INVOICE();
 			if (this.editInvoice) {
@@ -329,7 +357,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(['editInvoice']),
+		...mapState(['editInvoice', 'currentInvoiceArray']),
 	},
 	watch: {
 		paymentTerms() {
