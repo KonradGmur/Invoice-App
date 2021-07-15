@@ -200,7 +200,7 @@
 <script>
 import Loading from '../components/Loading.vue';
 import db from '../firebase/firebaseInit';
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 import { uid } from 'uid';
 export default {
 	name: 'invoiceModal',
@@ -271,6 +271,8 @@ export default {
 	},
 	methods: {
 		...mapMutations(['TOGGLE_INVOICE', 'TOOGLE_MODAL', 'TOGGLE_EDIT_INVOICE']),
+
+		...mapActions(['UPDATE_INVOICE']),
 
 		closeInvoice() {
 			this.TOGGLE_INVOICE();
@@ -384,7 +386,12 @@ export default {
 
 			this.loading = false;
 
-			this.TOGGLE_INVOICE();
+			const data = {
+				docId: this.docId,
+				routeId: this.$route.params.invoiceId,
+			};
+
+			this.UPDATE_INVOICE(data);
 		},
 
 		submitForm() {
