@@ -108,7 +108,7 @@ export default createStore({
 				invoicePaid: true,
 				invoicePending: false,
 			});
-			commit('UPDATE_STATUS_TO_PAID');
+			commit('UPDATE_STATUS_TO_PAID', docId);
 		},
 		async UPDATE_STATUS_TO_PENDING({ commit }, docId) {
 			const getInvoice = db.collection('invoices').doc(docId);
@@ -117,7 +117,7 @@ export default createStore({
 				invoicePending: true,
 				invoiceDraft: false,
 			});
-			commit('UPDATE_STATUS_TO_PENDING');
+			commit('UPDATE_STATUS_TO_PENDING', docId);
 		},
 	},
 	modules: {},

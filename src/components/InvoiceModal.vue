@@ -9,7 +9,7 @@
 			<h1 v-if="!editInvoice">New Invoice</h1>
 			<h1 v-else>Edit Invoice</h1>
 
-			<!--Bill From -->
+			<!-- Bill From -->
 			<div class="bill-from flex flex-column">
 				<h4>Bill From</h4>
 				<div class="input flex flex-column">
@@ -46,7 +46,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- Bill To-->
+
+			<!-- Bill To -->
 			<div class="bill-to flex flex-column">
 				<h4>Bill To</h4>
 				<div class="input flex flex-column">
@@ -91,7 +92,8 @@
 					</div>
 				</div>
 			</div>
-			<!--Invoice Work Details-->
+
+			<!-- Invoice Work Details -->
 			<div class="invoice-work flex flex-column">
 				<div class="payment flex">
 					<div class="input flex flex-column">
@@ -136,7 +138,7 @@
 							<th class="item-name">Item Name</th>
 							<th class="qty">Qty</th>
 							<th class="price">Price</th>
-							<th class="total">Total</th>
+							<th class="total">Toal</th>
 						</tr>
 						<tr
 							class="table-items flex"
@@ -146,10 +148,8 @@
 							<td class="item-name">
 								<input type="text" v-model="item.itemName" />
 							</td>
-							<td class="qty"><input type="text" v-model="item.item.qty" /></td>
-							<td class="price">
-								<input type="text" v-model="item.item.price" />
-							</td>
+							<td class="qty"><input type="text" v-model="item.qty" /></td>
+							<td class="price"><input type="text" v-model="item.price" /></td>
 							<td class="total flex">
 								${{ (item.total = item.qty * item.price) }}
 							</td>
@@ -160,16 +160,20 @@
 							/>
 						</tr>
 					</table>
+
 					<div @click="addNewInvoiceItem" class="flex button">
 						<img src="@/assets/icon-plus.svg" alt="" />
 						Add New Item
 					</div>
 				</div>
 			</div>
-			<!--Save/Exit-->
+
+			<!-- Save/Exit -->
 			<div class="save flex">
 				<div class="left">
-					<button @click="closeInvoice" class="red">Cancel</button>
+					<button type="button" @click="closeInvoice" class="red">
+						Cancel
+					</button>
 				</div>
 				<div class="right flex">
 					<button
@@ -178,7 +182,7 @@
 						@click="saveDraft"
 						class="dark-purple"
 					>
-						Safe Draft
+						Save Draft
 					</button>
 					<button
 						v-if="!editInvoice"
@@ -188,7 +192,7 @@
 					>
 						Create Invoice
 					</button>
-					<button v-if="editInvoice" class="purple" type="submit">
+					<button v-if="editInvoice" type="sumbit" class="purple">
 						Update Invoice
 					</button>
 				</div>
@@ -198,9 +202,9 @@
 </template>
 
 <script>
-import Loading from '../components/Loading.vue';
 import db from '../firebase/firebaseInit';
-import { mapMutations, mapState, mapActions } from 'vuex';
+import Loading from '../components/Loading';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import { uid } from 'uid';
 export default {
 	name: 'invoiceModal',
@@ -231,8 +235,8 @@ export default {
 			invoiceTotal: 0,
 		};
 	},
-	components() {
-		Loading;
+	components: {
+		Loading,
 	},
 	created() {
 		// get current date for invoice date field
@@ -243,9 +247,8 @@ export default {
 				this.dateOptions
 			);
 		}
-
 		if (this.editInvoice) {
-			const currentInvoice = this.currnetInvoiceArray[0];
+			const currentInvoice = this.currentInvoiceArray[0];
 			this.docId = currentInvoice.docId;
 			this.billerStreetAddress = currentInvoice.billerStreetAddress;
 			this.billerCity = currentInvoice.billerCity;
@@ -270,26 +273,22 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['TOGGLE_INVOICE', 'TOOGLE_MODAL', 'TOGGLE_EDIT_INVOICE']),
-
-		...mapActions(['UPDATE_INVOICE']),
-
+		...mapMutations(['TOGGLE_INVOICE', 'TOGGLE_MODAL', 'TOGGLE_EDIT_INVOICE']),
+		...mapActions(['UPDATE_INVOICE', 'GET_INVOICES']),
+		checkClick(e) {
+			if (e.target === this.$refs.invoiceWrap) {
+				this.TOGGLE_MODAL();
+			}
+		},
 		closeInvoice() {
 			this.TOGGLE_INVOICE();
 			if (this.editInvoice) {
 				this.TOGGLE_EDIT_INVOICE();
 			}
 		},
-
-		checkClick(e) {
-			if (e.target === this.$refs.invoiceWrap) {
-				this.TOOGLE_MODAL();
-			}
-		},
-
 		addNewInvoiceItem() {
 			this.invoiceItemList.push({
-				id: iud(),
+				id: uid(),
 				itemName: '',
 				qty: '',
 				price: 0,
@@ -313,18 +312,14 @@ export default {
 		saveDraft() {
 			this.invoiceDraft = true;
 		},
-
 		async uploadInvoice() {
 			if (this.invoiceItemList.length <= 0) {
 				alert('Please ensure you filled out work items!');
 				return;
 			}
 			this.loading = true;
-
 			this.calInvoiceTotal();
-
-			const dataBase = db.collection('invoice').doc();
-
+			const dataBase = db.collection('invoices').doc();
 			await dataBase.set({
 				invoiceId: uid(6),
 				billerStreetAddress: this.billerStreetAddress,
@@ -349,10 +344,9 @@ export default {
 				invoiceDraft: this.invoiceDraft,
 				invoicePaid: null,
 			});
-
 			this.loading = false;
-
 			this.TOGGLE_INVOICE();
+			this.GET_INVOICES();
 		},
 		async updateInvoice() {
 			if (this.invoiceItemList.length <= 0) {
@@ -360,11 +354,8 @@ export default {
 				return;
 			}
 			this.loading = true;
-
 			this.calInvoiceTotal();
-
-			const dataBase = db.collection('invoice').doc(this.docId);
-
+			const dataBase = db.collection('invoices').doc(this.docId);
 			await dataBase.update({
 				billerStreetAddress: this.billerStreetAddress,
 				billerCity: this.billerCity,
@@ -383,17 +374,13 @@ export default {
 				invoiceItemList: this.invoiceItemList,
 				invoiceTotal: this.invoiceTotal,
 			});
-
 			this.loading = false;
-
 			const data = {
 				docId: this.docId,
 				routeId: this.$route.params.invoiceId,
 			};
-
 			this.UPDATE_INVOICE(data);
 		},
-
 		submitForm() {
 			if (this.editInvoice) {
 				this.updateInvoice();
@@ -424,7 +411,6 @@ export default {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: transparent;
 	width: 100%;
 	height: 100vh;
 	overflow: scroll;
@@ -434,7 +420,6 @@ export default {
 	@media (min-width: 900px) {
 		left: 90px;
 	}
-
 	.invoice-content {
 		position: relative;
 		padding: 56px;
@@ -444,29 +429,24 @@ export default {
 		color: #fff;
 		box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2),
 			0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
 		h1 {
 			margin-bottom: 48px;
 			color: #fff;
 		}
-
 		h3 {
 			margin-bottom: 16px;
 			font-size: 18px;
 			color: #777f98;
 		}
-
 		h4 {
 			color: #7c5dfa;
 			font-size: 12px;
 			margin-bottom: 24px;
 		}
-
-		// Bill To // Bill From
+		// Bill To / Bill From
 		.bill-to,
 		.bill-from {
 			margin-bottom: 48px;
-
 			.location-details {
 				gap: 16px;
 				div {
@@ -474,7 +454,6 @@ export default {
 				}
 			}
 		}
-
 		// Invoice Work
 		.invoice-work {
 			.payment {
@@ -483,25 +462,20 @@ export default {
 					flex: 1;
 				}
 			}
-
 			.work-items {
 				.item-list {
 					width: 100%;
-
 					// Item Table Styling
-					.table-headeing,
+					.table-heading,
 					.table-items {
 						gap: 16px;
 						font-size: 12px;
-
 						.item-name {
 							flex-basis: 50%;
 						}
-
 						.qty {
 							flex-basis: 10%;
 						}
-
 						.price {
 							flex-basis: 20%;
 						}
@@ -510,19 +484,15 @@ export default {
 							align-self: center;
 						}
 					}
-
 					.table-heading {
 						margin-bottom: 16px;
-
 						th {
 							text-align: left;
 						}
 					}
-
 					.table-items {
 						position: relative;
 						margin-bottom: 24px;
-
 						img {
 							position: absolute;
 							top: 15px;
@@ -532,14 +502,12 @@ export default {
 						}
 					}
 				}
-
 				.button {
 					color: #fff;
 					background-color: #252945;
 					align-items: center;
 					justify-content: center;
 					width: 100%;
-
 					img {
 						margin-right: 4px;
 					}
@@ -548,11 +516,9 @@ export default {
 		}
 		.save {
 			margin-top: 60px;
-
 			div {
 				flex: 1;
 			}
-
 			.right {
 				justify-content: flex-end;
 			}
@@ -561,12 +527,10 @@ export default {
 	.input {
 		margin-bottom: 24px;
 	}
-
 	label {
 		font-size: 12px;
 		margin-bottom: 6px;
 	}
-
 	input,
 	select {
 		width: 100%;
@@ -575,10 +539,9 @@ export default {
 		border-radius: 4px;
 		padding: 12px 4px;
 		border: none;
-	}
-
-	&:focus {
-		outline: none;
+		&:focus {
+			outline: none;
+		}
 	}
 }
 </style>
