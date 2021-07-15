@@ -14,7 +14,7 @@ export default createStore({
 		TOGGLE_INVOICE(state) {
 			state.invoiceModal = !state.invoiceModal;
 		},
-		TOOGLE_MODAL(state) {
+		TOGGLE_MODAL(state) {
 			state.modalActive = !state.modalActive;
 		},
 		SET_INVOICE_DATA(state, payload) {
@@ -59,7 +59,7 @@ export default createStore({
 			const getData = db.collection('invoices');
 			const results = await getData.get();
 			results.forEach((doc) => {
-				if (!state.invoiceData.some((invoice) => invoice.docID === doc.id)) {
+				if (!state.invoiceData.some((invoice) => invoice.docId === doc.id)) {
 					const data = {
 						docId: doc.id,
 						invoiceId: doc.data().invoiceId,
