@@ -3,7 +3,7 @@
     <div class="header flex">
       <div class="left flex flex-column">
         <h1>Invoices</h1>
-        <span>There are 4 total invoices</span>
+        <span>There are {{invoiceData.lenght}} total invoices</span>
       </div>
       <div class="right flex">
         <div @click="toggleFilterMenu" class="filter flex"></div>
@@ -26,7 +26,7 @@
     <!--Invoices -->
     <div v-if="invoiceData.lenngth > 0">
       <Invoice
-        v-for="(invoice, index) in invoiceData"
+        v-for="(invoice, index) in filteredData"
         :invoice="invoice"
         :key="index"
       />
@@ -71,6 +71,21 @@ export default {
   },
   computed: {
     ...mapState(["invoiceData"]),
+
+    filteredData(){
+      return this.invoiceData.filter(invoice => {
+        if(this.filteredInvice === "Draft"){
+          return invoice.invoiceDraft === true;
+        }
+        if(this.filteredInvice === "Pending"){
+          return invoice.invoicePending === true;
+        }
+        if(this.filteredInvice === "Paid"){
+          return invoice.invoicePaid === true;
+        }
+        return invoice;
+      })
+    }
   },
 };
 </script>
