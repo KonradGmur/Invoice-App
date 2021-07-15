@@ -7,13 +7,13 @@
       </div>
       <div class="right flex">
         <div @click="toggleFilterMenu" class="filter flex"></div>
-        <span>Filter by status</span>
+        <span>Filter by status <span v-if="filteredInvice">: {{filteredInvice}}</span></span>
         <img src="@/assets/icon-arrow-down.svg" alt="" />
         <ul v-show="filterMenu" class="filter-menu">
-          <li>Draft</li>
-          <li>Pending</li>
-          <li>Paid</li>
-          <li>Clear Filter</li>
+          <li @click="filteredInvice">Draft</li>
+          <li @click="filteredInvice">Pending</li>
+          <li @click="filteredInvice">Paid</li>
+          <li @click="filteredInvice">Clear Filter</li>
         </ul>
       </div>
       <div @click="newInvoice" class="button flex">
@@ -46,6 +46,7 @@ export default {
   data() {
     return {
       filterMenu: null,
+      filteredInvice: null,
     };
   },
   components: {
@@ -59,6 +60,13 @@ export default {
 
     toggleFilterMenu() {
       this.filterMenu = !this.filterMenu;
+    },
+    filteredInvice(e){
+      if(e.target.innerText === 'Clear Filter'){
+        this.filteredInvice = null; 
+        return;
+      }
+      this.filteredInvice = e.target.innerText;
     },
   },
   computed: {
