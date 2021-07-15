@@ -207,6 +207,7 @@ export default {
 	data() {
 		return {
 			dateOptions: { year: 'numeric', month: 'short', day: 'numeric' },
+			docId: null,
 			loading: null,
 			billerStreetAddress: null,
 			billerCity: null,
@@ -351,8 +352,46 @@ export default {
 
 			this.TOGGLE_INVOICE();
 		},
+		async updateInvoice() {
+			if (this.invoiceItemList.length <= 0) {
+				alert('Please ensure you filled out work items!');
+				return;
+			}
+			this.loading = true;
+
+			this.calInvoiceTotal();
+
+			const dataBase = db.collection('invoice').doc(this.docId);
+
+			await dataBase.update({
+				billerStreetAddress: this.billerStreetAddress,
+				billerCity: this.billerCity,
+				billerZipCode: this.billerZipCode,
+				billerCountry: this.billerCountry,
+				clientName: this.clientName,
+				clientEmail: this.clientEmail,
+				clientStreetAddress: this.clientStreetAddress,
+				clientCity: this.clientCity,
+				clientZipCode: this.clientZipCode,
+				clientCountry: this.clientCountry,
+				paymentTerms: this.paymentTerms,
+				paymentDueDate: this.paymentDueDate,
+				paymentDueDateUnix: this.paymentDueDateUnix,
+				productDescription: this.productDescription,
+				invoiceItemList: this.invoiceItemList,
+				invoiceTotal: this.invoiceTotal,
+			});
+
+			this.loading = false;
+
+			this.TOGGLE_INVOICE();
+		},
 
 		submitForm() {
+			if (this.editInvoice) {
+				this.updateInvoice();
+				return;
+			}
 			this.uploadInvoice();
 		},
 	},
